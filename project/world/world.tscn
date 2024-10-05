@@ -98,7 +98,7 @@ size_flags_horizontal = 4
 text = "Play Again"
 
 [node name="MobSpawnPoint" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -17)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19)
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="pressed" from="GameOverContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]

@@ -16,7 +16,7 @@ func _ready() -> void:
 	mob.size = 3
 	add_child(mob)
 	mob.global_position = $MobSpawnPoint.global_position
-	
+	mob.descend()
 
 
 func _on_child_entered_tree(node: Node) -> void:

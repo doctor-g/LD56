@@ -4,8 +4,8 @@ signal hit_left
 signal hit_right
 signal destroyed
 
-var mean_time_between_shots := 1.0
-var deviation_between_shots := 0.2
+var mean_time_between_shots := 1.5
+var deviation_between_shots := 0.3
 
 func _ready() -> void:
 	_prepare_next_shot()
@@ -21,7 +21,8 @@ func _physics_process(_delta: float) -> void:
 func damage() -> void:
 	for critter in $Critters.get_children():
 		critter.bound = false
-		critter.reparent(get_parent())
+		# Yuck.
+		critter.reparent(get_tree().root)
 		critter.top_level = true
 	destroyed.emit()
 	queue_free()

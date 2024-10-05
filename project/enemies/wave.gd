@@ -1,10 +1,13 @@
 extends Node3D
 
-@export var size := 1
-@export var space_between := 5
+const DESCEND_DISTANCE := 2.0
 
+var size := 1
+var space_between := 5
+var time_between_descents := 3.0
 var speed := 3.5
-var direction := Vector3(-1,0,0)
+
+var _direction := Vector3(-1,0,0)
 
 @onready var _enemies_remaining := size
 
@@ -18,17 +21,27 @@ func _ready() -> void:
 			enemy.position.x = remap(i, 0, size-1, -mob_width/2, mob_width/2)
 		
 		enemy.hit_left.connect(func():
-			direction = Vector3(1,0,0)
+			_direction = Vector3(1,0,0)
 		)
 		enemy.hit_right.connect(func():
-			direction = Vector3(-1,0,0)
+			_direction = Vector3(-1,0,0)
 		)
 		enemy.destroyed.connect(func():
 			_enemies_remaining -= 1
 			if _enemies_remaining == 0:
 				queue_free()
 		)
+		
+	descend()
 
+
+func descend() -> void:
+	await create_tween()\
+		.tween_property(self, "position:z", position.z + DESCEND_DISTANCE, 1.0)\
+		.finished
+	await get_tree().create_timer(time_between_descents).timeout
+	descend()
+	
 
 func _physics_process(delta: float) -> void:
-	position += direction * speed * delta
+	position += _direction * speed * delta
