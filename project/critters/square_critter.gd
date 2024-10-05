@@ -34,6 +34,13 @@ func _physics_process(delta: float) -> void:
 		
 		velocity = Vector3(speed,0,0).rotated(Vector3.UP, rotation.y)
 		move_and_slide()
+		
+		# Turn eyes to look toward next direction.
+		# It is subtle, but it's fun.
+		var lookahead := _noise.get_noise_1d(_seconds_unbound + 1)
+		var eye_rotation := remap(lookahead, -1, 1, -PI, PI)
+		for eye in $Eyes.get_children():
+			eye.rotation.y = eye_rotation
 
 
 func capture() -> void:
