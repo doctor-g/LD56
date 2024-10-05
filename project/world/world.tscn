@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://iecyipog4mxn"]
+[gd_scene load_steps=9 format=3 uid="uid://iecyipog4mxn"]
 
 [ext_resource type="PackedScene" uid="uid://bfr1e5p414f76" path="res://player_ship/player_ship.tscn" id="1_47gyb"]
 [ext_resource type="Script" path="res://world/world.gd" id="1_yhb16"]
-[ext_resource type="PackedScene" uid="uid://6ese1ateab5u" path="res://enemies/square_enemy.tscn" id="2_gi65c"]
 
 [sub_resource type="Environment" id="Environment_r7wpj"]
 background_mode = 1
@@ -14,7 +13,7 @@ reflected_light_source = 1
 glow_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hflo7"]
-size = Vector3(1, 1, 10)
+size = Vector3(1, 1, 50)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7ga2q"]
 font_size = 48
@@ -42,16 +41,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.193948, 0)
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.0618, -8.26086)
 
-[node name="SquareEnemy" parent="." instance=ExtResource("2_gi65c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+[node name="WorldBounds" type="StaticBody3D" parent="."]
+collision_layer = 32
+collision_mask = 0
 
-[node name="PlayerBounds" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBounds"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldBounds"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 0)
 shape = SubResource("BoxShape3D_hflo7")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="PlayerBounds"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="WorldBounds"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
 shape = SubResource("BoxShape3D_hflo7")
 
@@ -98,6 +96,9 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Play Again"
+
+[node name="MobSpawnPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -17)
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="pressed" from="GameOverContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]

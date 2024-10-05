@@ -49,4 +49,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.654897)
 [node name="ShotTimer" type="Timer" parent="."]
 autostart = true
 
+[node name="LeftRayCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+target_position = Vector3(-0.5, 0, 0)
+collision_mask = 32
+
+[node name="RightRayCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.500087, 0, 0)
+target_position = Vector3(0.5, 0, 0)
+collision_mask = 32
+
 [connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

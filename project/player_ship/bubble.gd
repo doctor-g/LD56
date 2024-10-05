@@ -26,6 +26,7 @@ func _on_body_entered(body: Node3D) -> void:
 		body.reparent(self)
 		$CollisionShape3D.set_deferred("disabled", false)
 		_captured_critter = body
+		_captured_critter.top_level = false
 		$CSGSphere3D.material.albedo_color.r = 255
 	else:
 		print("Pop!")

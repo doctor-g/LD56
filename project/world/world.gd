@@ -11,6 +11,12 @@ func _ready() -> void:
 	$PlayerShip.exploded.connect(func():
 		$GameOverContainer.visible = true
 	)
+	
+	var mob := preload("res://enemies/wave.tscn").instantiate()
+	mob.size = 3
+	add_child(mob)
+	mob.global_position = $MobSpawnPoint.global_position
+	
 
 
 func _on_child_entered_tree(node: Node) -> void:

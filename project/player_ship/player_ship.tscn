@@ -18,6 +18,7 @@ rings = 16
 colors = PackedColorArray(1, 0.992241, 0, 1, 1, 0.410694, 0, 1)
 
 [node name="PlayerShip" instance=ExtResource("1_rsfik")]
+collision_mask = 32
 script = ExtResource("2_qnanq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3"]
