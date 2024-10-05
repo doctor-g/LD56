@@ -1,11 +1,19 @@
 class_name PlayerShip extends CharacterBody3D
 
+signal exploded
+
 var speed := 8.0
 
 var _can_fire := true
 var _can_bubble := true
 
+var _alive := true
+var _meshes := [$hull_cockpitPoint, $hull_body, $attachment_barrelEnd]
+
 func _physics_process(delta: float) -> void:
+	if not _alive:
+		return
+	
 	var direction := Input.get_axis("move_left", "move_right")
 	velocity.x = direction * speed
 	move_and_collide(velocity * delta)
@@ -25,6 +33,18 @@ func _physics_process(delta: float) -> void:
 		$BubbleTimer.start()
 	
 	
+func damage() -> void:
+	if not _alive:
+		return
+	
+	_alive = false
+	$CollisionShape3D.set_deferred("disabled", true)
+	$ExplosionParticles.emitting = true
+	
+	for mesh in _meshes:
+		await get_tree().create_timer(0.2).timeout
+		mesh.visible = false
+
 
 func _on_shot_timer_timeout() -> void:
 	_can_fire = true
@@ -32,3 +52,7 @@ func _on_shot_timer_timeout() -> void:
 
 func _on_bubble_timer_timeout() -> void:
 	_can_bubble = true
+
+
+func _on_explosion_particles_finished() -> void:
+	exploded.emit()

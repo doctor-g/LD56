@@ -61,6 +61,7 @@ launch_bubble={
 2d_physics/layer_3="enemies"
 3d_physics/layer_3="enemies"
 3d_physics/layer_4="critters"
+3d_physics/layer_5="enemy_bullets"
 
 [rendering]
 

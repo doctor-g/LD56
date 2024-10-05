@@ -8,6 +8,9 @@ var _captured_critters := 0:
 
 func _ready() -> void:
 	_update_score_label()
+	$PlayerShip.exploded.connect(func():
+		$GameOverContainer.visible = true
+	)
 
 
 func _on_child_entered_tree(node: Node) -> void:
@@ -17,3 +20,7 @@ func _on_child_entered_tree(node: Node) -> void:
 
 func _update_score_label() -> void:
 	%ScoreLabel.text = "Score: %d" % _captured_critters
+
+
+func _on_play_again_button_pressed() -> void:
+	get_tree().change_scene_to_packed(load("res://world/world.tscn"))
