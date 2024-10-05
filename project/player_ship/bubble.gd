@@ -4,6 +4,13 @@ extends Area3D
 
 var _captured_critter : Node3D
 
+@onready var _mesh := $CSGSphere3D
+
+func _ready() -> void:
+	_mesh.scale = Vector3.ZERO
+	create_tween().tween_property(_mesh, "scale", Vector3.ONE, 0.5)
+
+
 func _physics_process(delta: float) -> void:
 	# When a critter is captured, fly up toward the camera until off screen
 	if _captured_critter != null:
