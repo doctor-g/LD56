@@ -29,3 +29,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.130344, 0.1, 0.119995)
 
 [node name="Eye2" parent="Eyes" instance=ExtResource("2_25u4y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.130344, 0.1, -0.122736)
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
