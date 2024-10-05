@@ -5,8 +5,9 @@ var max_wave_size := 5
 
 var _waves_spawned := 0
 
-func _ready() -> void:
+func start() -> void:
 	_spawn_mob()
+	$WaveSpawnTimer.start()
 
 
 func _spawn_mob() -> void:

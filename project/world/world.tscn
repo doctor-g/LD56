@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://iecyipog4mxn"]
+[gd_scene load_steps=13 format=3 uid="uid://iecyipog4mxn"]
 
 [ext_resource type="PackedScene" uid="uid://bfr1e5p414f76" path="res://player_ship/player_ship.tscn" id="1_47gyb"]
 [ext_resource type="Script" path="res://world/world.gd" id="1_yhb16"]
@@ -25,6 +25,12 @@ emission_enabled = true
 
 [sub_resource type="LabelSettings" id="LabelSettings_x56wb"]
 font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_q1f8u"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_8syb2"]
+font_size = 24
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_yhb16")
@@ -71,12 +77,12 @@ scale_amount_min = 0.1
 scale_amount_max = 0.2
 
 [node name="WaveGenerator" type="Marker3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19)
 script = ExtResource("3_ihlo5")
 
 [node name="WaveSpawnTimer" type="Timer" parent="WaveGenerator"]
 wait_time = 6.0
-autostart = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_wcr52")
@@ -131,15 +137,55 @@ alignment = 1
 
 [node name="GameOverLabel" type="Label" parent="HUD/GameOverContainer"]
 layout_mode = 2
-text = "GAME O."
+text = "GAME OVER"
 label_settings = SubResource("LabelSettings_x56wb")
 horizontal_alignment = 1
 
 [node name="PlayAgainButton" type="Button" parent="HUD/GameOverContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Play Again"
+text = "Return to Menu"
+
+[node name="TitleContainer" type="Control" parent="HUD"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/TitleContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="HUD/TitleContainer/VBoxContainer"]
+layout_mode = 2
+text = "SPACE CRITTER RESCUE MISSION"
+label_settings = SubResource("LabelSettings_q1f8u")
+horizontal_alignment = 1
+
+[node name="BeginMissionButton" type="Button" parent="HUD/TitleContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Begin Mission"
+
+[node name="Credits" type="Label" parent="HUD/TitleContainer"]
+offset_top = 694.0
+offset_right = 1024.0
+offset_bottom = 761.0
+text = "Another Silly Game by Paul Gestwicki
+Created for Ludum Dare 56
+"
+label_settings = SubResource("LabelSettings_8syb2")
+horizontal_alignment = 1
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="timeout" from="WaveGenerator/WaveSpawnTimer" to="WaveGenerator" method="_on_mob_spawn_timer_timeout"]
 [connection signal="pressed" from="HUD/GameOverContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="HUD/TitleContainer/VBoxContainer/BeginMissionButton" to="." method="_on_begin_mission_button_pressed"]
