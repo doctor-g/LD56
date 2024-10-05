@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" path="res://player_ship/bubble.gd" id="1_so2yv"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sltcm"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hdvkv"]
+resource_local_to_scene = true
 transparency = 1
 albedo_color = Color(1, 1, 1, 0.498039)
 
@@ -16,7 +17,7 @@ script = ExtResource("1_so2yv")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
 radius = 0.75
-material = SubResource("StandardMaterial3D_sltcm")
+material = SubResource("StandardMaterial3D_hdvkv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_6tr2n")

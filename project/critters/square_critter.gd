@@ -33,6 +33,10 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 
 
+func capture() -> void:
+	$CollisionShape3D.set_deferred("disabled", true)
+
+
 func damage() -> void:
 	print("BLEP")
 	queue_free()
