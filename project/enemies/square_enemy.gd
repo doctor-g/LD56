@@ -21,7 +21,8 @@ func _physics_process(_delta: float) -> void:
 func damage() -> void:
 	for critter in $Critters.get_children():
 		critter.bound = false
-		# Yuck.
+		# I need these at the top level so that they don't 
+		# disappear when the mob is freed.
 		critter.reparent(get_tree().root)
 		critter.top_level = true
 	destroyed.emit()

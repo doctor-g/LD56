@@ -16,7 +16,13 @@ func _physics_process(delta: float) -> void:
 	
 	var direction := Input.get_axis("move_left", "move_right")
 	velocity.x = direction * speed
-	move_and_collide(velocity * delta)
+	var collisions := move_and_collide(velocity * delta)
+	if collisions != null:
+		for i in collisions.get_collision_count():
+			var collider := collisions.get_collider(i)
+			if collider.is_in_group("enemies"):
+				damage()
+				break
 	
 	if Input.is_action_pressed("fire") and _can_fire:
 		var projectile := preload("res://player_ship/player_bullet.tscn").instantiate()
@@ -39,6 +45,7 @@ func damage() -> void:
 	
 	_alive = false
 	$CollisionShape3D.set_deferred("disabled", true)
+	$ExplosionParticles.visible = true
 	$ExplosionParticles.emitting = true
 	
 	for mesh in _meshes:

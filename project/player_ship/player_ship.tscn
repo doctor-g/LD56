@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://player_ship/player_ship.gd" id="2_qnanq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nuod6"]
-size = Vector3(0.977051, 1, 2.04834)
+size = Vector3(1, 1, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_urma8"]
 vertex_color_use_as_albedo = true
@@ -18,7 +18,7 @@ rings = 16
 colors = PackedColorArray(1, 0.992241, 0, 1, 1, 0.410694, 0, 1)
 
 [node name="PlayerShip" instance=ExtResource("1_rsfik")]
-collision_mask = 32
+collision_mask = 44
 script = ExtResource("2_qnanq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3"]
@@ -36,6 +36,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.205187, -1.98779)
 
 [node name="ExplosionParticles" type="CPUParticles3D" parent="." index="7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.379835, -0.530447)
+visible = false
 emitting = false
 amount = 30
 lifetime = 0.4
