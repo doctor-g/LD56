@@ -1,11 +1,14 @@
 class_name SquareCritter extends CharacterBody3D
 
+signal captured
+
 @export var speed := 1.5
 ## Radians per second
 @export var max_turn_speed := TAU
 
 var _noise : FastNoiseLite
 var _seconds_unbound := 0.0
+var _captured := false
 
 var bound := true:
 	set(value):
@@ -34,7 +37,12 @@ func _physics_process(delta: float) -> void:
 
 
 func capture() -> void:
-	$CollisionShape3D.set_deferred("disabled", true)
+	# The deferred call here seems to allow for multiple calls to this.
+	# The state variable avoids this problem.
+	if not _captured:
+		$CollisionShape3D.set_deferred("disabled", true)
+		_captured = true
+		captured.emit()
 
 
 func damage() -> void:
