@@ -46,7 +46,7 @@ func capture() -> void:
 
 
 func damage() -> void:
-	print("BLEP")
+	Sfx.play_death()
 	queue_free()
 
 

@@ -21,7 +21,10 @@ func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
-	if body.is_in_group("critters"):
+	# The extra null check is required since turning off collisions is
+	# deferred.
+	if body.is_in_group("critters") and _captured_critter == null:
+		Sfx.play_pickup()
 		body.capture()
 		body.reparent(self)
 		$CollisionShape3D.set_deferred("disabled", false)
@@ -29,6 +32,6 @@ func _on_body_entered(body: Node3D) -> void:
 		_captured_critter.top_level = false
 		$CSGSphere3D.material.albedo_color.r = 255
 	else:
-		print("Pop!")
+		Sfx.play_pop()
 		queue_free()
 		

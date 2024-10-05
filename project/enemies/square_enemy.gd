@@ -26,6 +26,7 @@ func damage() -> void:
 		critter.reparent(get_tree().root)
 		critter.top_level = true
 	destroyed.emit()
+	Sfx.play_break_apart()
 	queue_free()
 
 
@@ -40,6 +41,7 @@ func _shoot() -> void:
 	get_parent().add_child(bullet)
 	bullet.global_position = $MuzzleMarker.global_position
 	bullet.top_level = true
+	Sfx.play_enemy_laser()
 	_prepare_next_shot()
 
 
