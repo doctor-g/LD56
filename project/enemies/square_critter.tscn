@@ -1,7 +1,42 @@
-[gd_scene load_steps=4 format=3 uid="uid://btkqvxtnfm8ty"]
+[gd_scene load_steps=3 format=3 uid="uid://bxt0dhhfyoyab"]
 
-[ext_resource type="Script" path="res://enemies/square_critter.gd" id="1_6livu"]
-[ext_resource type="Texture2D" uid="uid://baquqwh7c8ixx" path="res://icon.svg" id="1_uh7sk"]
+[sub_resource type="GDScript" id="GDScript_bvg8r"]
+script/source = "extends CharacterBody2D
+
+signal damaged
+
+@export_group(\"Movement\")
+@export var speed := 50.0
+## Radians per second
+@export var max_rotation_speed := PI
+
+var bound_as_enemy := true
+var _unbound_seconds := 0.0
+
+@onready var _noise : FastNoiseLite
+
+func _ready() -> void:
+	
+	_noise = FastNoiseLite.new()
+	_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
+	_noise.seed = randi()
+
+
+func damage() -> void:
+	damaged.emit()
+
+
+func _physics_process(delta: float) -> void:
+	if not bound_as_enemy:
+		_unbound_seconds += delta
+		var sample = _noise.get_noise_1d(_unbound_seconds)
+		var rotation_amount = sample * max_rotation_speed * delta
+		
+		rotate(remap(rotation_amount, -1, 1, -PI/2, PI/2))
+		velocity = Vector2(speed, 0).rotated(rotation)
+		move_and_slide()
+		
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wwdrn"]
 size = Vector2(50, 50)
@@ -9,11 +44,17 @@ size = Vector2(50, 50)
 [node name="SquareCritter" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 2
-script = ExtResource("1_6livu")
-
-[node name="Icon" type="Sprite2D" parent="."]
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_uh7sk")
+script = SubResource("GDScript_bvg8r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_wwdrn")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+color = Color(0.139085, 0.282225, 0.880165, 1)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(20, 0)

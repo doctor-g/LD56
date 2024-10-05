@@ -2,9 +2,16 @@ extends CharacterBody2D
 
 signal damaged
 
-var bound_as_enemy := true
+@export var bound_as_enemy := true
+@export var noise : Noise
 
 var speed := 50.0
+
+func _ready() -> void:
+	# Set the velocity to an X-forward vector.
+	# It won't be used until this becomes unbound.
+	velocity = Vector2(speed, 0).rotated(rotation)
+
 
 func damage() -> void:
 	damaged.emit()
