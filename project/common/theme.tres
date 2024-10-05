@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ddhhk3dhovsfl"]
+
+[ext_resource type="FontFile" uid="uid://vsw4obp37u13" path="res://common/SpaceGrotesk-VariableFont_wght.ttf" id="1_btheb"]
+
+[resource]
+default_font = ExtResource("1_btheb")
+default_font_size = 32

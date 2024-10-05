@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bfr1e5p414f76" path="res://player_ship/player_ship.tscn" id="1_47gyb"]
 [ext_resource type="Script" path="res://world/world.gd" id="1_yhb16"]
 [ext_resource type="Script" path="res://world/wave_generator.gd" id="3_ihlo5"]
+[ext_resource type="Theme" uid="uid://ddhhk3dhovsfl" path="res://common/theme.tres" id="3_yga5y"]
 [ext_resource type="AudioStream" uid="uid://b6a082vpcvn65" path="res://world/music.ogg" id="4_wcr52"]
 
 [sub_resource type="Environment" id="Environment_r7wpj"]
@@ -16,9 +17,6 @@ glow_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hflo7"]
 size = Vector3(1, 1, 50)
-
-[sub_resource type="LabelSettings" id="LabelSettings_7ga2q"]
-font_size = 48
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vys26"]
 emission_enabled = true
@@ -55,13 +53,6 @@ shape = SubResource("BoxShape3D_hflo7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
 shape = SubResource("BoxShape3D_hflo7")
 
-[node name="ScoreLabel" type="Label" parent="."]
-unique_name_in_owner = true
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Score: 0"
-label_settings = SubResource("LabelSettings_7ga2q")
-
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -21.5821, -37.4825)
 material_override = SubResource("StandardMaterial3D_vys26")
@@ -79,26 +70,6 @@ initial_velocity_max = 6.0
 scale_amount_min = 0.1
 scale_amount_max = 0.2
 
-[node name="GameOverContainer" type="VBoxContainer" parent="."]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="GameOverLabel" type="Label" parent="GameOverContainer"]
-layout_mode = 2
-text = "GAME O."
-label_settings = SubResource("LabelSettings_x56wb")
-horizontal_alignment = 1
-
-[node name="PlayAgainButton" type="Button" parent="GameOverContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Play Again"
-
 [node name="WaveGenerator" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19)
 script = ExtResource("3_ihlo5")
@@ -112,6 +83,63 @@ stream = ExtResource("4_wcr52")
 autoplay = true
 parameters/looping = true
 
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("3_yga5y")
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -42.0
+offset_right = 250.0
+grow_vertical = 0
+text = "Critters Saved: 0"
+
+[node name="ScoreLabel2" type="Label" parent="HUD"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -42.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "←→=Move  Z=Shoot  X=Bubble "
+
+[node name="GameOverContainer" type="VBoxContainer" parent="HUD"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="GameOverLabel" type="Label" parent="HUD/GameOverContainer"]
+layout_mode = 2
+text = "GAME O."
+label_settings = SubResource("LabelSettings_x56wb")
+horizontal_alignment = 1
+
+[node name="PlayAgainButton" type="Button" parent="HUD/GameOverContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Play Again"
+
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
-[connection signal="pressed" from="GameOverContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
 [connection signal="timeout" from="WaveGenerator/WaveSpawnTimer" to="WaveGenerator" method="_on_mob_spawn_timer_timeout"]
+[connection signal="pressed" from="HUD/GameOverContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]

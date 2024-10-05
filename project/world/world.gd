@@ -9,7 +9,8 @@ var _captured_critters := 0:
 func _ready() -> void:
 	_update_score_label()
 	$PlayerShip.exploded.connect(func():
-		$GameOverContainer.visible = true
+		%GameOverContainer.visible = true
+		%PlayAgainButton.grab_focus()
 	)
 
 
@@ -19,7 +20,7 @@ func _on_child_entered_tree(node: Node) -> void:
 
 
 func _update_score_label() -> void:
-	%ScoreLabel.text = "Score: %d" % _captured_critters
+	%ScoreLabel.text = "Critters Saved: %d" % _captured_critters
 
 
 func _on_play_again_button_pressed() -> void:
