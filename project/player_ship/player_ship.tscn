@@ -1,22 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxaf5gstd3bmn"]
+[gd_scene load_steps=4 format=3 uid="uid://bfr1e5p414f76"]
 
-[ext_resource type="Texture2D" uid="uid://baquqwh7c8ixx" path="res://icon.svg" id="1_7afbw"]
-[ext_resource type="Script" path="res://player_ship/player_ship.gd" id="1_prugf"]
+[ext_resource type="PackedScene" uid="uid://h6b2p6scwx37" path="res://player_ship/player_ship.glb" id="1_rsfik"]
+[ext_resource type="Script" path="res://player_ship/player_ship.gd" id="2_qnanq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0vj1u"]
-size = Vector2(125, 125)
+[sub_resource type="BoxShape3D" id="BoxShape3D_nuod6"]
+size = Vector3(0.977051, 1, 2.04834)
 
-[node name="PlayerShip" type="CharacterBody2D"]
-script = ExtResource("1_prugf")
+[node name="PlayerShip" instance=ExtResource("1_rsfik")]
+collision_mask = 0
+script = ExtResource("2_qnanq")
 
-[node name="Icon" type="Sprite2D" parent="."]
-texture = ExtResource("1_7afbw")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00708008, 0.504672, -0.52417)
+shape = SubResource("BoxShape3D_nuod6")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -0.5)
-shape = SubResource("RectangleShape2D_0vj1u")
+[node name="ShotTimer" type="Timer" parent="." index="4"]
+wait_time = 0.33
 
-[node name="ShotTimer" type="Timer" parent="."]
-wait_time = 0.3
+[node name="MuzzleMarker" type="Marker3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.205187, -1.98779)
 
 [connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

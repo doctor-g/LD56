@@ -1,25 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://ndwg8jtqd6s8"]
+[gd_scene load_steps=3 format=3 uid="uid://d4i4y4874r0xe"]
 
 [ext_resource type="Script" path="res://player_ship/player_bullet.gd" id="1_pj8dy"]
-[ext_resource type="Texture2D" uid="uid://baquqwh7c8ixx" path="res://icon.svg" id="2_v7xfk"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1aenh"]
-radius = 7.0
-height = 42.0
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ghdmg"]
+height = 0.5
+radius = 0.1
 
-[node name="Bullet" type="CharacterBody2D"]
+[node name="PlayerBullet" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_pj8dy")
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(-1.90735e-06, 0.5)
-scale = Vector2(0.109375, 0.304688)
-texture = ExtResource("2_v7xfk")
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+radius = 0.1
+height = 0.5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_1aenh")
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_ghdmg")

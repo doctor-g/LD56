@@ -11,9 +11,18 @@ config_version=5
 [application]
 
 config/name="LD56"
-run/main_scene="res://world.tscn"
+run/main_scene="res://world/world.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1024
+window/size/viewport_height=1024
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg")
 
 [input]
 
@@ -38,5 +47,9 @@ fire={
 [layer_names]
 
 2d_physics/layer_1="player"
+3d_physics/layer_1="player"
 2d_physics/layer_2="player_bullets"
+3d_physics/layer_2="player_bullets"
 2d_physics/layer_3="enemies"
+3d_physics/layer_3="enemies"
+3d_physics/layer_4="critters"

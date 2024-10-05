@@ -1,6 +1,6 @@
-extends CharacterBody2D
+class_name PlayerShip extends CharacterBody3D
 
-var speed := 450.0
+var speed := 8.0
 
 var _can_fire := true
 
@@ -11,8 +11,8 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_pressed("fire") and _can_fire:
 		var projectile := preload("res://player_ship/player_bullet.tscn").instantiate()
-		projectile.global_position = global_position
 		get_parent().add_child(projectile)
+		projectile.global_position = $MuzzleMarker.global_position
 		_can_fire = false
 		$ShotTimer.start()
 	
