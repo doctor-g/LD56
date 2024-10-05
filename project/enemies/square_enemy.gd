@@ -4,6 +4,13 @@ signal hit_left
 signal hit_right
 signal destroyed
 
+var mean_time_between_shots := 1.0
+var deviation_between_shots := 0.2
+
+func _ready() -> void:
+	_prepare_next_shot()
+
+
 func _physics_process(_delta: float) -> void:
 	if $LeftRayCast.is_colliding():
 		hit_left.emit()
@@ -20,9 +27,16 @@ func damage() -> void:
 	queue_free()
 
 
-func _on_shot_timer_timeout() -> void:
+func _prepare_next_shot() -> void:
+	var duration := randfn(mean_time_between_shots, deviation_between_shots)
+	await get_tree().create_timer(duration).timeout
+	_shoot()
+
+
+func _shoot() -> void:
 	var bullet := preload("res://enemies/enemy_bullet.tscn").instantiate()
 	get_parent().add_child(bullet)
 	bullet.global_position = $MuzzleMarker.global_position
 	bullet.top_level = true
+	_prepare_next_shot()
 	
