@@ -3,7 +3,7 @@ extends Node3D
 const DESCEND_DISTANCE := 2.0
 
 var size := 1
-var space_between := 5
+var space_between := 3
 var time_between_descents := 3.0
 var speed := 3.5
 

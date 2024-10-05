@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://iecyipog4mxn"]
+[gd_scene load_steps=10 format=3 uid="uid://iecyipog4mxn"]
 
 [ext_resource type="PackedScene" uid="uid://bfr1e5p414f76" path="res://player_ship/player_ship.tscn" id="1_47gyb"]
 [ext_resource type="Script" path="res://world/world.gd" id="1_yhb16"]
+[ext_resource type="Script" path="res://world/wave_generator.gd" id="3_ihlo5"]
 
 [sub_resource type="Environment" id="Environment_r7wpj"]
 background_mode = 1
@@ -97,8 +98,14 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Play Again"
 
-[node name="MobSpawnPoint" type="Marker3D" parent="."]
+[node name="WaveGenerator" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19)
+script = ExtResource("3_ihlo5")
+
+[node name="WaveSpawnTimer" type="Timer" parent="WaveGenerator"]
+wait_time = 6.0
+autostart = true
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="pressed" from="GameOverContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
+[connection signal="timeout" from="WaveGenerator/WaveSpawnTimer" to="WaveGenerator" method="_on_mob_spawn_timer_timeout"]
