@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://d4i4y4874r0xe"]
+[gd_scene load_steps=8 format=3 uid="uid://d4i4y4874r0xe"]
 
 [ext_resource type="Script" path="res://player_ship/player_bullet.gd" id="1_pj8dy"]
 
@@ -6,20 +6,52 @@
 height = 0.5
 radius = 0.1
 
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_spgk8"]
+albedo_color = Color(0.988368, 0.995572, 0.798966, 1)
+emission_enabled = true
+emission = Color(0.988368, 0.995572, 0.798966, 1)
+emission_energy_multiplier = 1.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_inj62"]
+material = SubResource("ORMMaterial3D_spgk8")
+radius = 0.1
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_arku1"]
+albedo_color = Color(0.988368, 0.995572, 0.798966, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_cbd2y"]
+material = SubResource("StandardMaterial3D_arku1")
+radius = 0.1
+height = 0.1
+radial_segments = 16
+rings = 8
+
+[sub_resource type="Curve" id="Curve_ova0t"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.00794899), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="PlayerBullet" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 14
 script = ExtResource("1_pj8dy")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-radius = 0.1
-height = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 shape = SubResource("CylinderShape3D_ghdmg")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_inj62")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+amount = 6
+lifetime = 0.2
+mesh = SubResource("SphereMesh_cbd2y")
+gravity = Vector3(0, 0, 0)
+scale_amount_curve = SubResource("Curve_ova0t")
+color = Color(0.988368, 0.995572, 0.798966, 1)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

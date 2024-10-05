@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6xtfwdcsurhh"]
+[gd_scene load_steps=8 format=3 uid="uid://c6xtfwdcsurhh"]
 
 [ext_resource type="Script" path="res://enemies/enemy_bullet.gd" id="1_ojw8j"]
 
@@ -16,6 +16,20 @@ height = 0.5
 height = 0.4
 radius = 0.1
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mle87"]
+albedo_color = Color(1, 0, 0.0999999, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_iuiue"]
+material = SubResource("StandardMaterial3D_mle87")
+radius = 0.1
+height = 0.1
+radial_segments = 16
+rings = 8
+
+[sub_resource type="Curve" id="Curve_c8ym6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.00794899), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="EnemyBullet" type="Area3D"]
 collision_layer = 16
 script = ExtResource("1_ojw8j")
@@ -29,6 +43,13 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 
 shape = SubResource("CylinderShape3D_ewnaj")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+amount = 6
+lifetime = 0.2
+mesh = SubResource("SphereMesh_iuiue")
+gravity = Vector3(0, 0, 0)
+scale_amount_curve = SubResource("Curve_c8ym6")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
