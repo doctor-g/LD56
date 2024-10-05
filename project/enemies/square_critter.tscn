@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxt0dhhfyoyab"]
+[gd_scene load_steps=4 format=3 uid="uid://bxt0dhhfyoyab"]
+
+[ext_resource type="PackedScene" uid="uid://c5h06ifnmkyg5" path="res://enemies/eye.tscn" id="1_ayegm"]
 
 [sub_resource type="GDScript" id="GDScript_bvg8r"]
 script/source = "extends CharacterBody2D
@@ -10,7 +12,11 @@ signal damaged
 ## Radians per second
 @export var max_rotation_speed := PI
 
-var bound_as_enemy := true
+var bound_as_enemy := true:
+	set(value):
+		bound_as_enemy = value
+		$Eyes.visible = true
+		
 var _unbound_seconds := 0.0
 
 @onready var _noise : FastNoiseLite
@@ -35,7 +41,6 @@ func _physics_process(delta: float) -> void:
 		rotate(remap(rotation_amount, -1, 1, -PI/2, PI/2))
 		velocity = Vector2(speed, 0).rotated(rotation)
 		move_and_slide()
-		
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wwdrn"]
@@ -56,5 +61,11 @@ offset_right = 25.0
 offset_bottom = 25.0
 color = Color(0.139085, 0.282225, 0.880165, 1)
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(20, 0)
+[node name="Eyes" type="Node2D" parent="."]
+visible = false
+
+[node name="Eye" parent="Eyes" instance=ExtResource("1_ayegm")]
+position = Vector2(13, -12)
+
+[node name="Eye2" parent="Eyes" instance=ExtResource("1_ayegm")]
+position = Vector2(13, 12)
