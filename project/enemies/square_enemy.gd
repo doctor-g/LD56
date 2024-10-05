@@ -41,4 +41,7 @@ func _shoot() -> void:
 	bullet.global_position = $MuzzleMarker.global_position
 	bullet.top_level = true
 	_prepare_next_shot()
-	
+
+
+func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
+	queue_free()
