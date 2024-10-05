@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://btkqvxtnfm8ty"]
+
+[ext_resource type="Script" path="res://enemies/square_critter.gd" id="1_6livu"]
+[ext_resource type="Texture2D" uid="uid://baquqwh7c8ixx" path="res://icon.svg" id="1_uh7sk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wwdrn"]
+size = Vector2(50, 50)
+
+[node name="SquareCritter" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_6livu")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_uh7sk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wwdrn")

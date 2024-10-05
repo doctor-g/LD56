@@ -9,7 +9,7 @@ height = 42.0
 
 [node name="Bullet" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 0
+collision_mask = 4
 script = ExtResource("1_pj8dy")
 
 [node name="Icon" type="Sprite2D" parent="."]
