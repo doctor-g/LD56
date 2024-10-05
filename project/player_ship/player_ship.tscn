@@ -17,7 +17,11 @@ shape = SubResource("BoxShape3D_nuod6")
 [node name="ShotTimer" type="Timer" parent="." index="4"]
 wait_time = 0.33
 
-[node name="MuzzleMarker" type="Marker3D" parent="." index="5"]
+[node name="BubbleTimer" type="Timer" parent="." index="5"]
+wait_time = 0.5
+
+[node name="MuzzleMarker" type="Marker3D" parent="." index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.205187, -1.98779)
 
 [connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]
+[connection signal="timeout" from="BubbleTimer" to="." method="_on_bubble_timer_timeout"]

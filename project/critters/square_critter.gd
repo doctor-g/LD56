@@ -11,6 +11,7 @@ var bound := true:
 	set(value):
 		bound = value
 		$Eyes.visible = true
+		$CollisionShape3D.disabled = false
 
 
 func _ready() -> void:

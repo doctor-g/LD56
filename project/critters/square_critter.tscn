@@ -9,7 +9,7 @@ albedo_color = Color(0.139085, 0.282225, 0.880165, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_8hbti"]
 size = Vector3(0.5, 0.2, 0.5)
 
-[node name="SquareCritter" type="CharacterBody3D"]
+[node name="SquareCritter" type="CharacterBody3D" groups=["critters"]]
 collision_layer = 8
 collision_mask = 8
 script = ExtResource("1_4x12t")
@@ -20,6 +20,7 @@ material = SubResource("StandardMaterial3D_rwojr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_8hbti")
+disabled = true
 
 [node name="Eyes" type="Node3D" parent="."]
 

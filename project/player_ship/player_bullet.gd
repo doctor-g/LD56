@@ -1,4 +1,4 @@
-extends CharacterBody3D
+class_name PlayerBullet extends CharacterBody3D
 
 @export var speed := 12.0
 
@@ -10,3 +10,7 @@ func _physics_process(delta: float) -> void:
 			if collider.is_in_group("enemies"):
 				collider.damage()
 				queue_free()
+
+
+func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
+	queue_free()
