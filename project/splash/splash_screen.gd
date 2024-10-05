@@ -2,6 +2,7 @@ extends Control
 
 func _ready() -> void:
 	if OS.has_feature("editor"):
+		await get_tree().process_frame
 		_start_game()
 
 
