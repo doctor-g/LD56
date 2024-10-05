@@ -23,7 +23,7 @@ func damage() -> void:
 		critter.bound = false
 		# I need these at the top level so that they don't 
 		# disappear when the mob is freed.
-		critter.reparent(get_tree().root)
+		critter.reparent(get_tree().root.get_node("World"))
 		critter.top_level = true
 	destroyed.emit()
 	Sfx.play_break_apart()
