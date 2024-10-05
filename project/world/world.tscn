@@ -84,10 +84,9 @@ script = ExtResource("3_ihlo5")
 [node name="WaveSpawnTimer" type="Timer" parent="WaveGenerator"]
 wait_time = 6.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_wcr52")
 autoplay = true
-parameters/looping = true
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
@@ -176,6 +175,7 @@ layout_mode = 2
 text = "Begin Mission"
 
 [node name="Credits" type="Label" parent="HUD/TitleContainer"]
+layout_mode = 0
 offset_top = 694.0
 offset_right = 1024.0
 offset_bottom = 761.0
