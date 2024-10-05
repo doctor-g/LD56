@@ -1,6 +1,8 @@
-[gd_scene format=3 uid="uid://dv8ie3m2p3s3a"]
+[gd_scene load_steps=2 format=3 uid="uid://bakg0frmqvmuw"]
 
-[node name="Eye" type="Node3D"]
+[ext_resource type="PackedScene" uid="uid://byx4y7gwn1amq" path="res://critters/eye.glb" id="1_lbv4q"]
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
-radius = 0.1
+[node name="Eye" instance=ExtResource("1_lbv4q")]
+
+[node name="detail_eyeLarge" parent="." index="0"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)

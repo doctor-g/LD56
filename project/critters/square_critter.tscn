@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dy0flsah3msjx"]
 
 [ext_resource type="Script" path="res://critters/square_critter.gd" id="1_4x12t"]
-[ext_resource type="PackedScene" uid="uid://dv8ie3m2p3s3a" path="res://critters/eye.tscn" id="2_25u4y"]
+[ext_resource type="PackedScene" uid="uid://bakg0frmqvmuw" path="res://critters/eye.tscn" id="2_25u4y"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rwojr"]
 albedo_color = Color(0.139085, 0.282225, 0.880165, 1)
@@ -32,5 +32,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.130344, 0.1, -0.122736)
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
 aabb = AABB(-0.25, -1, -0.25, 0.5, 2, 0.5)
+
+[node name="Eye" parent="." instance=ExtResource("2_25u4y")]
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
