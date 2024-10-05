@@ -13,13 +13,12 @@ var _captured := false
 var bound := true:
 	set(value):
 		bound = value
-		$Eyes.visible = true
+		for eye in $Eyes.get_children():
+			eye.open()
 		$CollisionShape3D.disabled = false
 
 
 func _ready() -> void:
-	$Eyes.visible = false
-	
 	_noise = FastNoiseLite.new()
 	_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
 	_noise.seed = randi()
