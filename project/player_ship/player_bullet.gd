@@ -7,7 +7,7 @@ func _physics_process(delta: float) -> void:
 	if collision != null:
 		for i in collision.get_collision_count():
 			var collider = collision.get_collider(i)
-			if collider.is_in_group("enemies"):
+			if collider.has_method("damage"):
 				collider.damage()
 				queue_free()
 

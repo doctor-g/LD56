@@ -31,3 +31,8 @@ func _physics_process(delta: float) -> void:
 		
 		velocity = Vector3(speed,0,0).rotated(Vector3.UP, rotation.y)
 		move_and_slide()
+
+
+func damage() -> void:
+	print("BLEP")
+	queue_free()
