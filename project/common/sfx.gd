@@ -82,6 +82,7 @@ func _play_from(array : Array) -> void:
 	var player : AudioStreamPlayer
 	if _players.is_empty():
 		player = AudioStreamPlayer.new()
+		player.bus = "Sfx"
 		add_child(player)
 	else:
 		player = _players.pop_back()

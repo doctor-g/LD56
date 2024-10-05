@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://iecyipog4mxn"]
+[gd_scene load_steps=11 format=3 uid="uid://iecyipog4mxn"]
 
 [ext_resource type="PackedScene" uid="uid://bfr1e5p414f76" path="res://player_ship/player_ship.tscn" id="1_47gyb"]
 [ext_resource type="Script" path="res://world/world.gd" id="1_yhb16"]
 [ext_resource type="Script" path="res://world/wave_generator.gd" id="3_ihlo5"]
+[ext_resource type="AudioStream" uid="uid://b6a082vpcvn65" path="res://world/music.ogg" id="4_wcr52"]
 
 [sub_resource type="Environment" id="Environment_r7wpj"]
 background_mode = 1
@@ -105,6 +106,11 @@ script = ExtResource("3_ihlo5")
 [node name="WaveSpawnTimer" type="Timer" parent="WaveGenerator"]
 wait_time = 6.0
 autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wcr52")
+autoplay = true
+parameters/looping = true
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="pressed" from="GameOverContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
