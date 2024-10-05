@@ -2,7 +2,7 @@ class_name SquareCritter extends CharacterBody3D
 
 @export var speed := 1.5
 ## Radians per second
-@export var max_turn_speed := PI
+@export var max_turn_speed := TAU
 
 var _noise : FastNoiseLite
 var _seconds_unbound := 0.0
