@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 	if collisions != null:
 		for i in collisions.get_collision_count():
 			var collider := collisions.get_collider(i)
-			if collider.is_in_group("enemies"):
+			if collider.is_in_group("enemies") or collider.is_in_group("critters"):
 				damage()
 				break
 	
