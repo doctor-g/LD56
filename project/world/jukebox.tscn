@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://hoxm7pjfmdp6"]
+
+[ext_resource type="AudioStream" uid="uid://b6a082vpcvn65" path="res://world/music.ogg" id="1_8qtpa"]
+
+[node name="Jukebox" type="AudioStreamPlayer"]
+stream = ExtResource("1_8qtpa")
+bus = &"Music"

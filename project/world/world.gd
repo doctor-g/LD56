@@ -7,6 +7,9 @@ var _captured_critters := 0:
 
 
 func _ready() -> void:
+	if not Jukebox.playing:
+		Jukebox.play()
+	
 	%BeginMissionButton.grab_focus()
 	_update_score_label()
 	$PlayerShip.exploded.connect(func():
